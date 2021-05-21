@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\jkit5\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\jkit5\\.nuget\\packages"
+    ]
+  }
+}
