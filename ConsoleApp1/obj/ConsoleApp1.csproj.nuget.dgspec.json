@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jkit5\\RiderProjects\\Solution1\\ConsoleApp1\\ConsoleApp1.csproj": {}
+    "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jkit5\\RiderProjects\\Solution1\\ConsoleApp1\\ConsoleApp1.csproj": {
+    "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jkit5\\RiderProjects\\Solution1\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectUniqueName": "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "C:\\Users\\jkit5\\RiderProjects\\Solution1\\ConsoleApp1\\ConsoleApp1.csproj",
-        "packagesPath": "C:\\Users\\jkit5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jkit5\\RiderProjects\\Solution1\\ConsoleApp1\\obj\\",
+        "projectPath": "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj",
+        "packagesPath": "C:\\Users\\olesn\\.nuget\\packages\\",
+        "outputPath": "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jkit5\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\olesn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,6 +39,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.6.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -52,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\jkit5\\.dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
