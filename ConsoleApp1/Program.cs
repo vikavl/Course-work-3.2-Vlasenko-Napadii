@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 
 namespace ConsoleApp1
 {
@@ -13,80 +14,146 @@ namespace ConsoleApp1
         // public static int[] b = {10, 19, 22, 11, 1, 10, 13, 19, 1, 20};
         //
         // public static int B = 70;
-
-        static List<int> a { get; set; }
-        static List<int> b { get; set; }
         
-        static int n { get; set; }
-        static int B { get; set; }
+        
 
-
-        static void GenerateInputData()
+        public static int GetValidInput(
+            string message,
+            Predicate<int> predicate = null, 
+            string eror = "Wrong input!")
         {
-            var random = new Random();
-
-            n = random.Next(1, 11) * 2;
-            
-            a = new List<int>();
-            b = new List<int>();
-            for (int i = 0; i < n; i++)
+            Console.Write($"{message}: ");
+            int value = GetInteger();
+            while (!(predicate?.Invoke(value) ?? true))
             {
-                a.Add(random.Next(-50, 51));
+                Console.Write($"{eror} Try again: ");
+                value = GetInteger();
+            }
+            return value;
+        }
 
-                var value = 0;
-                while ((value = random.Next(1, 100)) < a[i])
-                {
-                }
+        static int GetInteger()
+        {
+            
+            int value = 0;
+            while (!int.TryParse(Console.ReadLine(), out value))
+            {
+                Console.Write("Wrong input! Try again: ");
+            }
+
+            return value;
+        }
+
+        static (Report greedy, Report bee, Report genetic) RunAlgorithms(InputData inputData, int numberOfIterations = 1000, int populationSize = 50)
+        {
+            var timer = new Stopwatch();
                 
-                b.Add(value);
+            timer.Start();
+            var greedyReport = GreedyAlgorithm.Calculate(inputData.n, inputData.a, inputData.b, inputData.B);
+            timer.Stop();
 
-                B = random.Next(20, 300);
+            greedyReport.Algorithm = "Greedy algorithm";
+            greedyReport.Time = timer.Elapsed.TotalSeconds;
+
+            timer.Restart();
+            var beeReport = BeeAlgorithm.Calculate(numberOfIterations, inputData.n, inputData.a.ToArray(), inputData.b.ToArray(), inputData.B);
+            timer.Start();
+
+            beeReport.Algorithm = "Bee algorithm";
+            beeReport.Time = timer.Elapsed.TotalSeconds;
+
+            timer.Restart();
+            var geneticReport = GeneticAlgorithm.Calculate(inputData.n, inputData.a, inputData.b, inputData.B,
+                SelectionType.OutBreeding, LocalOptimization.NotOptimize, numberOfIterations, populationSize);
+            timer.Start();
+                
+            geneticReport.Algorithm = "Genetic algorithm";
+            geneticReport.Time = timer.Elapsed.TotalSeconds;
+            
+            return (greedyReport, beeReport, geneticReport);
+        }
+
+        static void RunExperiments(int iterations, int n_min, int n_step, List<int> a_min, int a_step, List<int> b_min, int B_min)
+        {
+            int i;
+            InputData inputData;
+            for (i = 0, inputData = new InputData(n_min, a_min, b_min, B_min); i < iterations; 
+                i++, inputData = new InputData(n_min += n_step, a_min, b_min, B_min))
+            {
+                
             }
         }
-        
+
         [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH")]
         static void Main(string[] args)
         {
-            GenerateInputData();
-
-            foreach (var a_value in a)
+            var inputType = 0;
+            (Report greedy, Report bee, Report genetic) reports;
+            
+            do
             {
-                Console.Write($"{a_value} ");
-            }
+                var inputData = new InputData();
 
-            Console.WriteLine();
+                inputType = GetValidInput(
+                    "Choose input type (1 - random; 2 - custom; 3 - saved; 0 - exit)", 
+                    value => value >= 0 && value <= 3,
+                    "Value does not fit the range.");
 
-            foreach (var b_value in b)
-            {
-                Console.Write($"{b_value} ");
-            }
+                switch (inputType)
+                {
+                    case 1:
+                        inputData.GenerateInputData(GetValidInput(
+                            "Enter the number of elements", 
+                            value => value > 0 && value % 2 == 0, 
+                            "Value must be even."));
+                        
+                        Console.WriteLine(inputData.ViewInputData());
 
-            Console.WriteLine();
+                        if (GetValidInput(
+                            "Save data? (1 - yes; 0 - no)",
+                            value => value >= 0 && value < 2,
+                            "Value is out of range.") == 1)
+                            inputData.SaveInputData();
+                        
+                        reports = RunAlgorithms(inputData);
+                        Console.WriteLine(reports.greedy.ToString() + reports.bee + reports.genetic);
+                        break;
+                    case 2:
+                        inputData.EnterInputData(GetValidInput(
+                            "Enter the number of elements", 
+                            value => value > 0 && value % 2 == 0, 
+                            "Value must be even."));
+                        
+                        Console.WriteLine(inputData.ViewInputData());
+                        
+                        if (GetValidInput(
+                            "Save data? (1 - yes; 0 - no)",
+                            value => value >= 0 && value < 2,
+                            "Value is out of range.") == 1)
+                            inputData.SaveInputData();
+                        
+                        reports = RunAlgorithms(inputData);
+                        Console.WriteLine(reports.greedy.ToString() + reports.bee + reports.genetic);
+                        break;
+                    case 3:
+                        inputData.ReadInputData();
 
-            Console.WriteLine(n);
-            Console.WriteLine(B);
+                        if (inputData.n == 0)
+                        {
+                            Console.WriteLine("No data.");
+                            continue;
+                        }
 
-            
-            var timer = new Stopwatch();
-            
-            timer.Start();
-            var greedyReport = GreedyAlgorithm.Calculate(10, a, b, B);
-            timer.Stop();
+                        Console.WriteLine(inputData.ViewInputData());
+                        
+                        reports = RunAlgorithms(inputData);
+                        Console.WriteLine(reports.greedy.ToString() + reports.bee + reports.genetic);
+                        break;
+                    case 0:
+                        return;
+                }
 
-            Console.WriteLine(timer.Elapsed.TotalSeconds);
-            
-            timer.Restart();
-            var beeReport = BeeAlgorithm.Calculate(1000, 10, a.ToArray(), b.ToArray(), B);
-            timer.Start();
-
-            Console.WriteLine(timer.Elapsed.TotalSeconds);
-            
-            timer.Restart();
-            var geneticReport = GeneticAlgorithm.Calculate(10, a, b, B,
-                SelectionType.OutBreeding, LocalOptimization.NotOptimize, 1000, 1000);
-            timer.Start();
-
-            Console.WriteLine(timer.Elapsed.TotalSeconds);
+            } while (true);
         }
     }
 }

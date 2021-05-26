@@ -87,10 +87,6 @@ namespace ConsoleApp1
                     }
                 }
             } while (!(sum(arr) <= B));
-
-
-            //printArr(arr);
-            //Console.WriteLine("sum = "+sum(arr));
         }
 
         static int result(int[] arr)

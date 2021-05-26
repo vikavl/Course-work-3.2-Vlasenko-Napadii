@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace ConsoleApp1
 {
@@ -6,6 +7,9 @@ namespace ConsoleApp1
     {
         public static Report Calculate(int n, List<int> a, List<int> b, int B)
         {
+            var minRecords = new List<int>();
+            var maxRecords = new List<int>();
+            
             var x = new List<int>();
             int sum = 0;
             
@@ -20,6 +24,7 @@ namespace ConsoleApp1
                 
                 x.Add(value);
                 sum += value;
+                maxRecords.Add(GetFunctionResult(x, x.Count % 2 == 0 ? x.Count : x.Count - 1));
             }
 
             int maxValue = GetFunctionResult(x, n);
@@ -35,11 +40,12 @@ namespace ConsoleApp1
                 
                 x.Add(value);
                 sum += value;
+                minRecords.Add(GetFunctionResult(x, x.Count % 2 == 0 ? x.Count : x.Count - 1));
             }
             
             int minValue = GetFunctionResult(x, n);
 
-            return new Report((maxValue, 10, null), (minValue, 10, null));
+            return new Report((maxValue, 10, maxRecords), (minValue, 10, minRecords));
         }
 
         private static int GetFunctionResult(List<int> x, int n)
