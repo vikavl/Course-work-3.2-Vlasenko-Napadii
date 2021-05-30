@@ -38,9 +38,10 @@ namespace ConsoleApp1
         
         static void generateDopust(int[] arr)
         {
-            do 
+            do
             {
                 generateArr(arr);
+                adaptArr(arr);
             } while (!admissibility(arr));
         }
 
@@ -76,7 +77,7 @@ namespace ConsoleApp1
         
         static void adaptArr(int[] arr)
         {
-            do
+            while (!(sum(arr) <= B))
             {
                 for (int i = 0; i < arr.Length; i += 2)
                 {
@@ -86,7 +87,7 @@ namespace ConsoleApp1
                         else arr[i + 1]--;
                     }
                 }
-            } while (!(sum(arr) <= B));
+            }
         }
 
         static int result(int[] arr)

@@ -45,7 +45,7 @@ namespace ConsoleApp1
             
             int minValue = GetFunctionResult(x, n);
 
-            return new Report((maxValue, 10, maxRecords), (minValue, 10, minRecords));
+            return new Report((maxValue, n, maxRecords), (minValue, n, minRecords));
         }
 
         private static int GetFunctionResult(List<int> x, int n)

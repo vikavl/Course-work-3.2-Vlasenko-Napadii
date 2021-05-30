@@ -133,7 +133,8 @@ namespace ConsoleApp1
                         return false;
                     }
 
-                    if(Chromosomes[i] < b[i] || Chromosomes[i + 1] < b[i + 1])
+                    if (Chromosomes[i] < b[i] && Chromosomes[i] >= 0 ||
+                        Chromosomes[i + 1] < b[i + 1] && Chromosomes[i + 1] >= 0)
                     {
                         return false;
                     }
@@ -241,19 +242,19 @@ namespace ConsoleApp1
                         return false;
                     }
 
-                    if (Chromosomes[i] > 0 && Chromosomes[i + 1] > 0
+                    if (Chromosomes[i] >= 0 && Chromosomes[i + 1] >= 0
                                            && (Chromosomes[i] > a[i] || Chromosomes[i + 1] > a[i + 1]))
                     {
                         return false;
                     }
 
-                    if (Chromosomes[i] > 0 && Chromosomes[i + 1] < 0 
+                    if (Chromosomes[i] >= 0 && Chromosomes[i + 1] < 0 
                                            && (Chromosomes[i] < b[i] || Chromosomes[i + 1] > a[i + 1]))
                     {
                         return false;
                     }
 
-                    if (Chromosomes[i] < 0 && Chromosomes[i + 1] > 0
+                    if (Chromosomes[i] < 0 && Chromosomes[i + 1] >= 0
                                            && (Chromosomes[i] > a[i] || Chromosomes[i + 1] < b[i + 1]))
                     {
                         return false;
@@ -290,7 +291,7 @@ namespace ConsoleApp1
                             }
                         }
 
-                        else if (Chromosomes[i] > 0 && Chromosomes[i + 1] > 0)
+                        else if (Chromosomes[i] >= 0 && Chromosomes[i + 1] >= 0)
                         {
                             if (maxValue < Chromosomes[i] && Chromosomes[i] > a[i])
                             {
@@ -307,7 +308,7 @@ namespace ConsoleApp1
                             }
                         }
 
-                        else if (Chromosomes[i] > 0 && Chromosomes[i + 1] < 0)
+                        else if (Chromosomes[i] >= 0 && Chromosomes[i + 1] < 0)
                         {
                             if (maxValue < Chromosomes[i] && Chromosomes[i] < b[i])
                             {
@@ -324,7 +325,7 @@ namespace ConsoleApp1
                             }
                         }
                         
-                        else if (Chromosomes[i] < 0 && Chromosomes[i + 1] > 0)
+                        else if (Chromosomes[i] < 0 && Chromosomes[i + 1] >= 0)
                         {
                             if (maxValue < Math.Abs(Chromosomes[i]) && Chromosomes[i] > a[i])
                             {
@@ -378,6 +379,7 @@ namespace ConsoleApp1
             SelectionType selectionType, LocalOptimization optimization, 
             int numberOfIterations = 10, int populationSize = 15)
         {
+            if (numberOfIterations < 3) numberOfIterations = 3;
             NumberOfGenes = populationSize;
             RecordsForMax = new List<int>();
             int iterationsForMax = 0, recordForMax = 0;
@@ -583,6 +585,7 @@ namespace ConsoleApp1
                 do
                 {
                     gene = new Gene(n, a, b);
+                    gene.Reanimate(a, b, B);
                 } while (gene.Sum > B);
 
                 Population.Add(gene);
