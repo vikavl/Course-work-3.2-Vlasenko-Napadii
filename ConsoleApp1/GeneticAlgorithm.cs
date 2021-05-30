@@ -382,7 +382,7 @@ namespace ConsoleApp1
             if (numberOfIterations < 3) numberOfIterations = 3;
             NumberOfGenes = populationSize;
             RecordsForMax = new List<int>();
-            int iterationsForMax = 0, recordForMax = 0;
+            int iterationsForMax = 0, recordForMax = int.MinValue;
             
             CreatePopulation(n, a, b, B);
 
@@ -429,7 +429,7 @@ namespace ConsoleApp1
 
             RecordsForMin = new List<int>();
 
-            int recordForMin = 0, iterationsForMin = 0;
+            int recordForMin = int.MaxValue, iterationsForMin = 0;
             
             do
             {

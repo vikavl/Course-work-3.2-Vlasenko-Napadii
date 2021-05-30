@@ -36,7 +36,7 @@ namespace ConsoleApp1
             return value;
         }
 
-        static (Report greedy, Report bee, Report genetic) RunAlgorithms(InputData inputData, int numberOfIterations = 1000, int populationSize = 50)
+        static (Report greedy, Report bee, Report genetic) RunAlgorithms(InputData inputData, int numberOfIterations = 300, int populationSize = 50)
         {
             var timer = new Stopwatch();
                 
