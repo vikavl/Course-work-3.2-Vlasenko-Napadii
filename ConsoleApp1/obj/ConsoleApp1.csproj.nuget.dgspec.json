@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj": {}
+    "D:\\Documents\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj": {
+    "D:\\Documents\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectUniqueName": "D:\\Documents\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectPath": "D:\\Documents\\Repos\\Course-work-3.2\\ConsoleApp1\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\olesn\\.nuget\\packages\\",
-        "outputPath": "D:\\Документи\\Repos\\Course-work-3.2\\ConsoleApp1\\obj\\",
+        "outputPath": "D:\\Documents\\Repos\\Course-work-3.2\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\olesn\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\olesn\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
